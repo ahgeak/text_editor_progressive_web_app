@@ -1,7 +1,7 @@
 {
-  "name": "JATE",
+  "name": "text_editor_progressive_web_app",
   "version": "1.0.0",
-  "description": "",
+  "description": "A Progressive Web Application (PWA) text editor program that runs in the browser.",
   "main": "server.js",
   "scripts": {
     "start:dev": "",
@@ -12,8 +12,8 @@
     "client": ""
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "ahgeak",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
     "if-env": "^1.0.4"
