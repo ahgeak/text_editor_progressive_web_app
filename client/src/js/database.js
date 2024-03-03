@@ -14,50 +14,50 @@ const initdb = async () =>
       console.log('jate database created');
     },
   });
-
+  
 // Accepts content and adds it to the database
 export const putDb = async (content) => {
-  console.log('Put request to the database', content);
+  console.log('PUT to the database');
 
   // Create a connection to the database and version
-  const jateDB = await openDB('jate', 1);
+  const jateDb = await openDB('jate', 1);
 
   // Create a new transaction and specify the database and data privleges
-  const tx = jateDB.transaction('jate', 'readwrite');
+  const tx = jateDb.transaction('jate', 'readwrite');
 
   // Open the desired object store
   const store = tx.objectStore('jate');
 
   // Use the .put() method to update the data in the database
-  const request = store.put(content);
+  const request = store.put({ id: 1, value: content });
 
   // Confirmation of the request
   const result = await request;
-  console.log('Data updated to the database', result);
+  console.log('Data saved to the database', result.value);
 };
-//console.error('putDb not implemented');
 
-// Gets all the content from the database
+// Get all the content from the database
 export const getDb = async () => {
   console.log('GET from the database');
 
   // Create a connection to the database and version
-  const jateDB = await openDB('jate', 1);
+  const jateDb = await openDB('jate', 1);
 
   // Create a new transcation and specify the database and data privileges
-  const tx = jateDB.transaction('jate', 'readonly');
+  const tx = jateDb.transaction('jate', 'readonly');
 
   // Open up the desired object store
   const store = tx.objectStore('jate');
 
-  // Use the .getAll() method to get all data in the database
-  const request = store.getAll();
+  // Use the .get() method to get all data in the database
+  const request = store.get(1);
 
   // Confirmation of the request
   const result = await request;
-  console.log('result.value', result);
-  return result;
-  // console.error('getDb not implemented');
+  result
+    ? console.log('Data retrieved from the database', result.value)
+    : console.log('Data not found in the database');
+  return result?.value;
 };
 
 initdb();
